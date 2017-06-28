@@ -1,24 +1,25 @@
-﻿namespace RhinoVR {
-  ///<summary>
-  /// <para>Every RhinoCommon .rhp assembly must have one and only one PlugIn-derived
-  /// class. DO NOT create instances of this class yourself. It is the
-  /// responsibility of Rhino to create an instance of this class.</para>
-  /// <para>To complete plug-in information, please also see all PlugInDescription
-  /// attributes in AssemblyInfo.cs (you might need to click "Project" ->
-  /// "Show All Files" to see it in the "Solution Explorer" window).</para>
-  ///</summary>
-  public class RhinoVRPlugIn : Rhino.PlugIns.PlugIn {
+﻿// Decompiled with JetBrains decompiler
+// Type: RhinoVR.RhinoVRPlugIn
+// Assembly: RhinoVR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 0F066D18-B920-40E4-BC83-5E6F0AA166E5
+// Assembly location: C:\Program Files\Rhinoceros 5 (64-bit)\Plug-ins\RhinoVR.dll
+
+using Rhino.PlugIns;
+using Rhino.UI;
+using RhinoVR.Properties;
+
+namespace RhinoVR {
+  public class RhinoVRPlugIn : PlugIn {
+    public static RhinoVRPlugIn Instance { get; private set; }
+
     public RhinoVRPlugIn() {
-      Instance = this;
+
+      RhinoVRPlugIn.Instance = this;
     }
 
-    ///<summary>Gets the only instance of the RhinoVRPlugIn plug-in.</summary>
-    public static RhinoVRPlugIn Instance {
-      get; private set;
+    protected virtual LoadReturnCode OnLoad(ref string errorMessage) {
+      Panels.RegisterPanel((PlugIn)this, typeof(VR_PANEL), "lingMatrix", MainIcon.ling);
+      return (LoadReturnCode)1;
     }
-
-    // You can override methods here to change the plug-in behavior on
-    // loading and shut down, add options pages to the Rhino _Option command
-    // and mantain plug-in wide options in a document.
   }
 }

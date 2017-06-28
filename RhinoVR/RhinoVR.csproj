@@ -1,72 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Program Files\Rhinoceros 5 (64-bit)\Plug-ins\RhinoVR.dll-->
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug64</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{23FE6ACE-22F7-40CA-AF2D-7D9F7AD35856}</ProjectGuid>
+    <ProjectGuid>{A2F9E239-C689-4E2D-96B2-142CF7922BDF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RhinoVR</RootNamespace>
     <AssemblyName>RhinoVR</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <RootNamespace>RhinoVR</RootNamespace>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="RhinoCommon">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Rhinoceros 5.0\System\rhinocommon.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Program Files\Rhinoceros 5.0\System\RhinoCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="MyoSharp">
+      <HintPath>lib\MyoSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Speech" />
+    <Reference Include="SharpDX.XInput">
+      <HintPath>lib\SharpDX.XInput.dll</HintPath>
+    </Reference>
+    <Reference Include="OculusWrap">
+      <HintPath>lib\OculusWrap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="SharpDX">
+      <HintPath>lib\SharpDX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RhinoVRCommand.cs" />
+    <Compile Include="SunControllerConduit.cs" />
+    <Compile Include="ToolBoxConduit.cs" />
+    <Compile Include="RiftViewportConduit.cs" />
+    <Compile Include="MouseMover.cs" />
+    <Compile Include="LinearParameter.cs" />
+    <Compile Include="utils.cs" />
+    <Compile Include="MyoController.cs" />
+    <Compile Include="RhinoDocument.cs" />
+    <Compile Include="RhinoTool.cs" />
+    <Compile Include="ToolGroup.cs" />
+    <Compile Include="UserInput.cs" />
+    <Compile Include="Viewports.cs" />
+    <Compile Include="VoiceController.cs" />
+    <Compile Include="XController.cs" />
+    <Compile Include="OculusTracking.cs" />
     <Compile Include="RhinoVRPlugIn.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OpenVrPanelCommand.cs" />
+    <Compile Include="CloseVrPanelCommand.cs" />
+    <Compile Include="VR_PANEL.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\ToolIcons.cs" />
+    <Compile Include="Properties\MainIcon.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\MainIcon.resx" />
+    <EmbeddedResource Include="Properties\ToolIcons.resx" />
+    <EmbeddedResource Include="VR_PANEL.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).rhp"
-Erase "$(TargetPath)"</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <FallbackCulture>en-US</FallbackCulture>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU'">
-    <StartProgram>C:\Program Files\Rhinoceros 5.0\System\Rhino.exe</StartProgram>
-    <StartArguments>
-    </StartArguments>
-    <StartAction>Program</StartAction>
-  </PropertyGroup>
 </Project>
