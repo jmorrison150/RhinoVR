@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: RhinoVR.UserInput
-// Assembly: RhinoVR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 0F066D18-B920-40E4-BC83-5E6F0AA166E5
-// Assembly location: C:\Program Files\Rhinoceros 5 (64-bit)\Plug-ins\RhinoVR.dll
-
-using Rhino;
+﻿using Rhino;
 using Rhino.Commands;
 using Rhino.DocObjects;
 using Rhino.DocObjects.Tables;
@@ -126,33 +120,23 @@ namespace RhinoVR {
       }
       float leftThumbX;
       if (UserInput._controller.LeftThumbX_Active(out leftThumbX)) {
-        Vector3d vector3d = Transform.Multiply(startDir, Transform.Multiply(oculusToRhino, Transform.Multiply(rollPitchYaw, new Vector3d((double)leftThumbX / 20.0 * (double)UserInput._speedX1 * (double)UserInput._speedX2 * (double)UserInput._speedX10, 0.0, 0.0))));
+        Vector3d vector3d = (startDir * (oculusToRhino * (rollPitchYaw *  (new Vector3d((double)leftThumbX / 20.0 * (double)UserInput._speedX1 * (double)UserInput._speedX2 * (double)UserInput._speedX10, 0.0, 0.0)))));
+        Point3d local = startPos;
         // ISSUE: explicit reference operation
-        // ISSUE: variable of a reference type
-        Point3d & local = @startPos;
-        // ISSUE: explicit reference operation
-        // ISSUE: explicit reference operation
-        // ISSUE: explicit reference operation
-        Point3d point3d = Point3d.Addition(^ local, new Vector3d(((Vector3d)@vector3d).get_X(), ((Vector3d)@vector3d).get_Y(), 0.0));
-        // ISSUE: explicit reference operation
-        ^ local = point3d;
+        Point3d point3d = local +( new Vector3d(((Vector3d)@vector3d).X, ((Vector3d)@vector3d).Y, 0.0));
+         local = point3d;
       }
       float leftThumbY;
       if (UserInput._controller.LeftThumbY_Active(out leftThumbY)) {
-        Vector3d vector3d = Transform.Multiply(startDir, Transform.Multiply(oculusToRhino, Transform.Multiply(rollPitchYaw, new Vector3d(0.0, 0.0, -((double)leftThumbY / 20.0) * (double)UserInput._speedX1 * (double)UserInput._speedX2 * (double)UserInput._speedX10))));
+        Vector3d vector3d = startDir * (oculusToRhino *(rollPitchYaw* (new Vector3d(0.0, 0.0, -((double)leftThumbY / 20.0) * (double)UserInput._speedX1 * (double)UserInput._speedX2 * (double)UserInput._speedX10))));
+        Point3d  local = startPos;
         // ISSUE: explicit reference operation
-        // ISSUE: variable of a reference type
-        Point3d & local = @startPos;
-        // ISSUE: explicit reference operation
-        // ISSUE: explicit reference operation
-        // ISSUE: explicit reference operation
-        Point3d point3d = Point3d.Addition(^ local, new Vector3d(((Vector3d)@vector3d).get_X(), ((Vector3d)@vector3d).get_Y(), 0.0));
-        // ISSUE: explicit reference operation
-        ^ local = point3d;
+        Point3d point3d = local +( new Vector3d(((Vector3d)@vector3d).X, ((Vector3d)@vector3d).Y, 0.0));
+         local = point3d;
       }
       // ISSUE: explicit reference operation
       // ISSUE: explicit reference operation
-      startPos = new Point3d(((Point3d)@startPos).get_X(), ((Point3d)@startPos).get_Y(), zPositions[UserInput._zIndex]);
+      startPos = new Point3d(((Point3d)@startPos).X, ((Point3d)@startPos).Y, zPositions[UserInput._zIndex]);
       UserInput._startPos = startPos;
     }
 
@@ -215,10 +199,10 @@ namespace RhinoVR {
           if (!UserInput._miniViewportsOn) {
             if (Viewports.RiftViews[2] != null && Viewports.RiftViews[2].Document != null) {
               Viewports.CreateMiniViewports();
-              UserInput._target = Viewports.MiniViews[2].MainViewport.get_CameraTarget();
-              UserInput._location = Viewports.MiniViews[2].MainViewport.get_CameraLocation();
-              UserInput._cameraX = Viewports.MiniViews[2].MainViewport.get_CameraX();
-              UserInput._cameraY = Viewports.MiniViews[2].MainViewport.get_CameraY();
+              UserInput._target = Viewports.MiniViews[2].MainViewport.CameraTarget;
+              UserInput._location = Viewports.MiniViews[2].MainViewport.CameraLocation;
+              UserInput._cameraX = Viewports.MiniViews[2].MainViewport.CameraX;
+              UserInput._cameraY = Viewports.MiniViews[2].MainViewport.CameraY;
               UserInput._miniViewportsOn = true;
               UserInput._controller.SetVibration(true, true, 400);
               // ISSUE: explicit reference operation
@@ -235,75 +219,57 @@ namespace RhinoVR {
           float leftThumbX;
           if (UserInput._controller.LeftThumbX_Active(out leftThumbX)) {
             Transform transform = Transform.Rotation((double)leftThumbX * UserInput._norm2 * (double)UserInput._speedX1 * (double)UserInput._speedX2, new Vector3d(0.0, 0.0, 1.0), UserInput._target);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Vector3d)@UserInput._cameraX).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Vector3d)@UserInput._cameraY).Transform(transform);
+            (UserInput._location).Transform(transform);
+            (UserInput._cameraX).Transform(transform);
+            (UserInput._cameraY).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
-            Viewports.MiniViews[2].MainViewport.set_CameraUp(UserInput._cameraY);
+            Viewports.MiniViews[2].MainViewport.CameraUp = UserInput._cameraY;
           }
           float leftThumbY;
           if (UserInput._controller.LeftThumbY_Active(out leftThumbY)) {
-            Transform transform = Transform.Rotation((double)leftThumbY * UserInput._norm2 * (double)UserInput._speedX1 * (double)UserInput._speedX2, Vector3d.op_UnaryNegation(UserInput._cameraX), UserInput._target);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Vector3d)@UserInput._cameraX).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Vector3d)@UserInput._cameraY).Transform(transform);
+            Transform transform = Transform.Rotation((double)leftThumbY * UserInput._norm2 * (double)UserInput._speedX1 * (double)UserInput._speedX2, -(UserInput._cameraX), UserInput._target);
+            (UserInput._location).Transform(transform);
+            (UserInput._cameraX).Transform(transform);
+            (UserInput._cameraY).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
-            Viewports.MiniViews[2].MainViewport.set_CameraUp(UserInput._cameraY);
+            Viewports.MiniViews[2].MainViewport.CameraUp = UserInput._cameraY;
           }
           float rightThumbX;
           if (UserInput._controller.RightThumbX_Active(out rightThumbX)) {
             Transform transform = Transform.Translation(Vector3d.Multiply(Vector3d.Multiply(Vector3d.Multiply(UserInput._cameraX, (double)rightThumbX), (double)UserInput._speedX1), (double)UserInput._speedX2));
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._target).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
+            (UserInput._target).Transform(transform);
+            (UserInput._location).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
           }
           float rightThumbY;
           if (UserInput._controller.RightThumbY_Active(out rightThumbY)) {
             Transform transform = Transform.Translation(Vector3d.Multiply(Vector3d.Multiply(Vector3d.Multiply(UserInput._cameraY, (double)rightThumbY), (double)UserInput._speedX1), (double)UserInput._speedX2));
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._target).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
+            (UserInput._target).Transform(transform);
+            (UserInput._location).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
           }
           if (UserInput._controller.DPadUp_KeyOn()) {
-            // ISSUE: explicit reference operation
-            double a = Math.Atan(UserInput._scaleFactor * ((Point3d)@UserInput._location).DistanceTo(UserInput._target)) * 2.0;
+            double a = Math.Atan(UserInput._scaleFactor * (UserInput._location).DistanceTo(UserInput._target)) * 2.0;
             Transform transform = Transform.Scale(UserInput._target, 1.0 - Math.Sin(a) * UserInput._norm2 * (double)UserInput._speedX1 * (double)UserInput._speedX2);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
+            (UserInput._location).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
           }
           if (UserInput._controller.DPadDown_KeyOn()) {
-            // ISSUE: explicit reference operation
-            double a = Math.Atan(UserInput._scaleFactor * ((Point3d)@UserInput._location).DistanceTo(UserInput._target)) * 2.0;
+            double a = Math.Atan(UserInput._scaleFactor * (UserInput._location).DistanceTo(UserInput._target)) * 2.0;
             Transform transform = Transform.Scale(UserInput._target, Math.Sin(a) * UserInput._norm2 * (double)UserInput._speedX1 * (double)UserInput._speedX2 + 1.0);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
+            (UserInput._location).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
           }
           if (UserInput._controller.DPadLeft_KeyOn()) {
             Transform transform = Transform.Translation(Vector3d.Multiply(Vector3d.Multiply(Vector3d.Multiply(UserInput._cameraX, -0.5), (double)UserInput._speedX1), (double)UserInput._speedX2));
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._target).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
+            (UserInput._target).Transform(transform);
+            (UserInput._location).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
           }
           if (UserInput._controller.DPadRight_KeyOn()) {
             Transform transform = Transform.Translation(Vector3d.Multiply(Vector3d.Multiply(Vector3d.Multiply(UserInput._cameraX, 0.5), (double)UserInput._speedX1), (double)UserInput._speedX2));
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._target).Transform(transform);
-            // ISSUE: explicit reference operation
-            ((Point3d)@UserInput._location).Transform(transform);
+            (UserInput._target).Transform(transform);
+            (UserInput._location).Transform(transform);
             Viewports.MiniViews[2].MainViewport.SetCameraLocations(UserInput._target, UserInput._location);
           }
         }
@@ -324,9 +290,9 @@ namespace RhinoVR {
       if (objRefArray == null || objRefArray.Length < 1)
         return (Result)3;
       string str = "#VR User Defined Floors";
-      int num = rhinoDocument.get_Layers().Find(str, true);
+      int num = rhinoDocument.Layers.Find(str, true);
       if (num < 0) {
-        LayerTable layers = rhinoDocument.get_Layers();
+        LayerTable layers = rhinoDocument.Layers;
         num = layers.Add(str, Color.Black);
         if (num < 0) {
           RhinoApp.WriteLine("Unable to add <{0}> layer.", (object)str);

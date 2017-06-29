@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: RhinoVR.ToolBoxConduit
-// Assembly: RhinoVR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 0F066D18-B920-40E4-BC83-5E6F0AA166E5
-// Assembly location: C:\Program Files\Rhinoceros 5 (64-bit)\Plug-ins\RhinoVR.dll
-
-using Rhino;
+﻿using Rhino;
 using Rhino.Display;
 using Rhino.Geometry;
 using RhinoVR.Properties;
@@ -41,7 +35,6 @@ namespace RhinoVR {
     }
 
     public ToolBoxConduit() {
-      base.\u002Ector();
     }
 
     protected virtual void DrawOverlay(DrawEventArgs e) {
@@ -55,9 +48,7 @@ namespace RhinoVR {
           this.SelectionBox(e, RiftViewportConduit.CursorInLeftViewport);
           this.MenuLayout(e);
           this.ToolLayout(e);
-          Point2d point2d;
-          // ISSUE: explicit reference operation
-          ((Point2d)@point2d).\u002Ector((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
+          Point2d point2d = new Point2d ((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
           e.Display.Draw2dText(string.Format("Voice: {0}", (object)VoiceController.RecognizedText), this._voiceCommandColor, point2d, false, this._fontSize);
         }
         if (e.Viewport.Name == Viewports.MiniViewportTitles[0]) {
@@ -65,9 +56,7 @@ namespace RhinoVR {
           this.SelectionBox(e, RiftViewportConduit.CursorInLeftViewport);
           this.MenuLayout(e);
           this.ToolLayout(e);
-          Point2d point2d;
-          // ISSUE: explicit reference operation
-          ((Point2d)@point2d).\u002Ector((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
+          Point2d point2d = new Point2d((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
           e.Display.Draw2dText(string.Format("Voice: {0}", (object)VoiceController.RecognizedText), this._voiceCommandColor, point2d, false, this._fontSize);
         }
         if (!(e.Viewport.Name == Viewports.MiniViewportTitles[1]))
@@ -76,9 +65,7 @@ namespace RhinoVR {
         this.SelectionBox(e, RiftViewportConduit.CursorInRightViewport);
         this.MenuLayout(e);
         this.ToolLayout(e);
-        Point2d point2d1;
-        // ISSUE: explicit reference operation
-        ((Point2d)@point2d1).\u002Ector((double)(this._popUpPosRight.X - 30), (double)(this._popUpPosRight.Y - 150));
+        Point2d point2d1 = new Point2d((double)(this._popUpPosRight.X - 30), (double)(this._popUpPosRight.Y - 150));
         e.Display.Draw2dText(string.Format("Voice: {0}", (object)VoiceController.RecognizedText), this._voiceCommandColor, point2d1, false, this._fontSize);
       } else {
         if (e.Viewport.Name == Viewports.RiftViewportTitles[2]) {
@@ -86,9 +73,7 @@ namespace RhinoVR {
           this.SelectionBox(e, RiftViewportConduit.CursorInLeftViewport);
           this.MenuLayout(e);
           this.ToolLayout(e);
-          Point2d point2d;
-          // ISSUE: explicit reference operation
-          ((Point2d)@point2d).\u002Ector((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
+          Point2d point2d = new Point2d((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
           e.Display.Draw2dText(string.Format("Voice: {0}", (object)VoiceController.RecognizedText), this._voiceCommandColor, point2d, false, this._fontSize);
         }
         if (e.Viewport.Name == Viewports.RiftViewportTitles[0]) {
@@ -96,9 +81,7 @@ namespace RhinoVR {
           this.SelectionBox(e, RiftViewportConduit.CursorInLeftViewport);
           this.MenuLayout(e);
           this.ToolLayout(e);
-          Point2d point2d;
-          // ISSUE: explicit reference operation
-          ((Point2d)@point2d).\u002Ector((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
+          Point2d point2d = new Point2d((double)(this._popUpPosLeft.X - 30), (double)(this._popUpPosLeft.Y - 150));
           e.Display.Draw2dText(string.Format("Voice: {0}", (object)VoiceController.RecognizedText), this._voiceCommandColor, point2d, false, this._fontSize);
         }
         if (!(e.Viewport.Name == Viewports.RiftViewportTitles[1]))
@@ -107,9 +90,7 @@ namespace RhinoVR {
         this.SelectionBox(e, RiftViewportConduit.CursorInRightViewport);
         this.MenuLayout(e);
         this.ToolLayout(e);
-        Point2d point2d1;
-        // ISSUE: explicit reference operation
-        ((Point2d)@point2d1).\u002Ector((double)(this._popUpPosRight.X - 30), (double)(this._popUpPosRight.Y - 150));
+        Point2d point2d1 = new Point2d((double)(this._popUpPosRight.X - 30), (double)(this._popUpPosRight.Y - 150));
         e.Display.Draw2dText(string.Format("Voice: {0}", (object)VoiceController.RecognizedText), this._voiceCommandColor, point2d1, false, this._fontSize);
       }
     }
@@ -119,36 +100,36 @@ namespace RhinoVR {
       for (int index1 = 0; index1 < this._menuTotalAmount; ++index1) {
         double num1 = (double)popUpPosition.X + Math.Sin(2.0 * Math.PI / (double)this._menuTotalAmount * (double)index1) * (double)this._menuLayoutRadius;
         double num2 = (double)popUpPosition.Y + Math.Cos(2.0 * Math.PI / (double)this._menuTotalAmount * (double)index1) * (double)this._menuLayoutRadius;
-        System.Drawing.Point location1 = new Point((int)(num1 - (double)(ToolGroup.MenuIconSize.Width / 2)), (int)(num2 - (double)(ToolGroup.MenuIconSize.Height / 2)));
-        this._menuGroup[index1].IconCenterSystem.Drawing.Point = new Point2d(num1, num2);
+        System.Drawing.Point location1 = new System.Drawing.Point((int)(num1 - (double)(ToolGroup.MenuIconSize.Width / 2)), (int)(num2 - (double)(ToolGroup.MenuIconSize.Height / 2)));
+        this._menuGroup[index1].IconCenterPoint = new Point2d(num1, num2);
         this._menuGroup[index1].IconBound = new Rectangle(location1, ToolGroup.MenuIconSize);
         double num3 = 2.0 * Math.PI / (double)this._menuTotalAmount * (double)index1 - 2.0 * Math.PI / (double)this._dividenOfSpan * (double)this._toolgroups[index1].Length / 2.0;
         double num4 = (double)popUpPosition.X + Math.Sin(num3) * (double)this._toolGroupArcRadius;
         double num5 = (double)popUpPosition.Y + Math.Cos(num3) * (double)this._toolGroupArcRadius;
         RhinoTool rhinoTool1 = this._menuGroup[index1];
-        Line world1 = e.Viewport.ClientToWorld(new Point((int)num4, (int)num5));
+        Line world1 = e.Viewport.ClientToWorld(new System.Drawing.Point((int)num4, (int)num5));
         // ISSUE: explicit reference operation
-        Point3d from1 = ((Line)@world1).get_From();
+        Point3d from1 = world1.From;
         rhinoTool1.ArcPoint0 = from1;
         double num6 = (double)popUpPosition.X + Math.Sin(num3 + 2.0 * Math.PI / (double)this._dividenOfSpan * (double)(this._toolgroups[index1].Length / 2)) * (double)this._toolGroupArcRadius;
         double num7 = (double)popUpPosition.Y + Math.Cos(num3 + 2.0 * Math.PI / (double)this._dividenOfSpan * (double)(this._toolgroups[index1].Length / 2)) * (double)this._toolGroupArcRadius;
         RhinoTool rhinoTool2 = this._menuGroup[index1];
-        Line world2 = e.Viewport.ClientToWorld(new Point((int)num6, (int)num7));
+        Line world2 = e.Viewport.ClientToWorld(new System.Drawing.Point((int)num6, (int)num7));
         // ISSUE: explicit reference operation
-        Point3d from2 = ((Line)@world2).get_From();
+        Point3d from2 = world2.From;
         rhinoTool2.ArcPoint1 = from2;
         double num8 = (double)popUpPosition.X + Math.Sin(num3 + 2.0 * Math.PI / (double)this._dividenOfSpan * (double)(this._toolgroups[index1].Length - 1)) * (double)this._toolGroupArcRadius;
         double num9 = (double)popUpPosition.Y + Math.Cos(num3 + 2.0 * Math.PI / (double)this._dividenOfSpan * (double)(this._toolgroups[index1].Length - 1)) * (double)this._toolGroupArcRadius;
         RhinoTool rhinoTool3 = this._menuGroup[index1];
-        Line world3 = e.Viewport.ClientToWorld(new Point((int)num8, (int)num9));
+        Line world3 = e.Viewport.ClientToWorld(new System.Drawing.Point((int)num8, (int)num9));
         // ISSUE: explicit reference operation
-        Point3d from3 = ((Line)@world3).get_From();
+        Point3d from3 = world3.From;
         rhinoTool3.ArcPoint2 = from3;
         for (int index2 = 0; index2 < this._toolgroups[index1].Length; ++index2) {
           double num10 = (double)popUpPosition.X + Math.Sin(num3 + 2.0 * Math.PI / (double)this._dividenOfSpan * (double)index2) * (double)this._toolLayoutRadius;
           double num11 = (double)popUpPosition.Y + Math.Cos(num3 + 2.0 * Math.PI / (double)this._dividenOfSpan * (double)index2) * (double)this._toolLayoutRadius;
-          System.Drawing.Point location2 = new Point((int)(num10 - (double)(ToolGroup.ToolIconSize.Width / 2)), (int)(num11 - (double)(ToolGroup.ToolIconSize.Height / 2)));
-          this._toolgroups[index1][index2].IconCenterSystem.Drawing.Point = new Point2d(num10, num11);
+          System.Drawing.Point location2 = new System.Drawing.Point((int)(num10 - (double)(ToolGroup.ToolIconSize.Width / 2)), (int)(num11 - (double)(ToolGroup.ToolIconSize.Height / 2)));
+          this._toolgroups[index1][index2].IconCenterPoint = new Point2d(num10, num11);
           this._toolgroups[index1][index2].IconBound = new Rectangle(location2, ToolGroup.ToolSelectionBoxSize);
         }
       }

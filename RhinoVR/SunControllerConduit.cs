@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: RhinoVR.SunControllerConduit
-// Assembly: RhinoVR, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 0F066D18-B920-40E4-BC83-5E6F0AA166E5
-// Assembly location: C:\Program Files\Rhinoceros 5 (64-bit)\Plug-ins\RhinoVR.dll
-
-using Rhino;
+﻿using Rhino;
 using Rhino.Display;
 using Rhino.Geometry;
 using System;
@@ -33,7 +27,7 @@ namespace RhinoVR {
     private Color _timeArcColor;
 
     public SunControllerConduit() {
-      base.\u002Ector();
+     
     }
 
     protected virtual void DrawForeground(DrawEventArgs e) {
@@ -50,14 +44,10 @@ namespace RhinoVR {
         for (int index = 0; index < 3; ++index) {
           double num1 = (double)(bounds.Width / 2) + Math.Sin(Math.PI - Math.PI / 2.0 * (double)index) * (double)this._dateSlideRadius;
           double num2 = (double)(bounds.Height / 2) + Math.Cos(Math.PI - Math.PI / 2.0 * (double)index) * (double)this._dateSlideRadius;
-          // ISSUE: explicit reference operation
-          // ISSUE: variable of a reference type
-          Point3d & local = @point3dArray[index];
-          Line world = e.Viewport.ClientToWorld(new Point((int)num1, (int)num2));
-          // ISSUE: explicit reference operation
-          Point3d from = ((Line)@world).get_From();
-          // ISSUE: explicit reference operation
-          ^ local = from;
+          Point3d local  = point3dArray[index];
+          Rhino.Geometry.Line world = e.Viewport.ClientToWorld(new System.Drawing.Point((int)num1, (int)num2));
+          Point3d from = world.From;
+          local = from;
         }
         e.Display.DrawArc(new Arc(new Circle(point3dArray[0], point3dArray[1], point3dArray[2]), 2.0 * Math.PI * this._dateParam), this._dateArcColor, 10);
       }
@@ -66,14 +56,10 @@ namespace RhinoVR {
         for (int index = 0; index < 3; ++index) {
           double num1 = (double)(bounds.Width / 2) + Math.Sin(Math.PI - Math.PI / 2.0 * (double)index) * (double)this._timeSlideRadious;
           double num2 = (double)(bounds.Height / 2) + Math.Cos(Math.PI - Math.PI / 2.0 * (double)index) * (double)this._timeSlideRadious;
-          // ISSUE: explicit reference operation
-          // ISSUE: variable of a reference type
-          Point3d & local = @point3dArray[index];
-          Line world = e.Viewport.ClientToWorld(new Point((int)num1, (int)num2));
-          // ISSUE: explicit reference operation
-          Point3d from = ((Line)@world).get_From();
-          // ISSUE: explicit reference operation
-          ^ local = from;
+          Point3d local = point3dArray[index];
+          Line world = e.Viewport.ClientToWorld(new System.Drawing.Point((int)num1, (int)num2));
+          Point3d from = world.From;
+          local = from;
         }
         e.Display.DrawArc(new Arc(new Circle(point3dArray[0], point3dArray[1], point3dArray[2]), 2.0 * Math.PI * this._timeParam), this._timeArcColor, 10);
       }
