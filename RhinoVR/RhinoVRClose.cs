@@ -6,25 +6,25 @@ using System;
 
 namespace RhinoVR {
   [Guid("3ceae358-bd8d-44e4-87c0-c22d5d7c1e3d")]
-  public class CloseVrPanelCommand : Rhino.Commands.Command {
+  public class RhinoVRClose : Rhino.Commands.Command {
 
 
-    public CloseVrPanelCommand() {
-      CloseVrPanelCommand.Instance = this;
+    public RhinoVRClose() {
+      RhinoVRClose.Instance = this;
     }
 
-    public static CloseVrPanelCommand Instance { get; private set; }
+    public static RhinoVRClose Instance { get; private set; }
 
 
     public override string EnglishName {
       get {
-        return "CloselingMatrix";
+        return "RhinoVRClose";
       }
     }
 
     protected override Result RunCommand(RhinoDoc doc, RunMode mode) {
       Panels.ClosePanel(typeof(VR_PANEL).GUID);
-      return (Result)0;
+      return Rhino.Commands.Result.Success;
     }
   }
 }

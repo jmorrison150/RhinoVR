@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace RhinoVR {
-  [Guid("A57419F7-2F26-4560-95F2-E32256A7D5F1")]
+  [Guid("D1508142-E289-4CF4-AB6F-AB5A1F1E4D9C")]
   public class VR_PANEL : UserControl {
     private static double _eyeHeight = 1.6;
     private readonly RiftViewportConduit _riftViewportConduit = new RiftViewportConduit();
@@ -73,29 +73,10 @@ namespace RhinoVR {
     private TextBox LATITUDE;
     private TextBox LONGITUDE;
 
-    public static double EyeHeight {
-      get {
-        return VR_PANEL._eyeHeight;
-      }
-    }
-
-    public static DisplayModeDescription[] DisplayModes {
-      get {
-        return VR_PANEL._displayModes;
-      }
-    }
-
-    public static double Latitude {
-      get {
-        return VR_PANEL._latitude;
-      }
-    }
-
-    public static double Longitude {
-      get {
-        return VR_PANEL._longitude;
-      }
-    }
+    public static double EyeHeight { get { return VR_PANEL._eyeHeight; } }
+    public static DisplayModeDescription[] DisplayModes { get { return VR_PANEL._displayModes; } }
+    public static double Latitude { get { return VR_PANEL._latitude; } }
+    public static double Longitude { get { return VR_PANEL._longitude; } }
 
     public VR_PANEL() {
       this.InitializeComponent();

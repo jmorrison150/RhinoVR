@@ -3,14 +3,15 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 
-[assembly: AssemblyTitle("lingMatrix")]
+[assembly: AssemblyTitle("RhinoVR")]
 [assembly: AssemblyDescription("Design in Virtual Reality Environment")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("lingMatrix")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyProduct("RhinoVR")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("c720bcd8-5e25-42d5-b7fb-7d7edcce7a6f")]
+[assembly: Guid("650EEE32-E18C-4A4B-AC05-4C5C3E34BC0A")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: AssemblyVersion("1.0.0.0")]
+

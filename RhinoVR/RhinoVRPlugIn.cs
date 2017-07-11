@@ -3,17 +3,20 @@ using Rhino.UI;
 using RhinoVR.Properties;
 
 namespace RhinoVR {
-  public class RhinoVRPlugIn : PlugIn {
+  public class RhinoVRPlugIn : Rhino.PlugIns.PlugIn {
     public static RhinoVRPlugIn Instance { get; private set; }
 
     public RhinoVRPlugIn() {
 
-      RhinoVRPlugIn.Instance = this;
+      Instance = this;
     }
 
-    protected virtual LoadReturnCode OnLoad(ref string errorMessage) {
-      Panels.RegisterPanel((PlugIn)this, typeof(VR_PANEL), "lingMatrix", MainIcon.ling);
-      return (LoadReturnCode)1;
+ 
+
+    protected override LoadReturnCode OnLoad(ref string errorMessage) {
+      System.Type panelType = typeof(VR_PANEL);
+      Rhino.UI.Panels.RegisterPanel(this, panelType, "RhinoVR", MainIcon.ling);
+      return Rhino.PlugIns.LoadReturnCode.Success;
     }
   }
 }
