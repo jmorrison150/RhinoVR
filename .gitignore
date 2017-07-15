@@ -241,14 +241,11 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-!openvr/
-openvr/*
+
+openvr/
 !openvr/bin/
-openvr/bin/*
 !openvr/bin/win64/
-openvr/bin/win64/*
 !openvr/bin/win64/openvr_api.dll
 
 !openvr/headers/
-openvr/headers/*
 !openvr/headers/openvr_api.cs
