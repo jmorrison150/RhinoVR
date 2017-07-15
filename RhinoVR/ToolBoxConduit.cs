@@ -22,20 +22,11 @@ namespace RhinoVR {
     private int _fontSize;
     private bool _voiceOn;
 
-    public System.Drawing.Point PopUpPosLeft {
-      set {
-        this._popUpPosLeft = value;
-      }
-    }
+    public System.Drawing.Point PopUpPosLeft {      set {        this._popUpPosLeft = value;      }    }
 
-    public System.Drawing.Point PopUpPosRight {
-      set {
-        this._popUpPosRight = value;
-      }
-    }
+    public System.Drawing.Point PopUpPosRight {      set {        this._popUpPosRight = value;      }    }
 
-    public ToolBoxConduit() {
-    }
+    public ToolBoxConduit() {    }
 
     protected virtual void DrawOverlay(DrawEventArgs e) {
       if (this._voiceOn) {

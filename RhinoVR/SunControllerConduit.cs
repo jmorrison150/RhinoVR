@@ -29,14 +29,12 @@ namespace RhinoVR {
     public SunControllerConduit() {
      
     }
-
     protected virtual void DrawForeground(DrawEventArgs e) {
       for (int index = 0; index < Viewports.RiftViews.Length; ++index) {
         if (Viewports.RiftViews[index] != null && Viewports.RiftViews[index].Document != null && e.Viewport.Name == Viewports.RiftViews[index].MainViewport.Name)
           this.SunSliderController(e);
       }
     }
-
     private void SunSliderController(DrawEventArgs e) {
       Rectangle bounds = e.Viewport.Bounds;
       if (this._dateParam != 0.0) {
@@ -68,7 +66,6 @@ namespace RhinoVR {
       e.Display.Draw2dText("Date", this._dateArcColor, new Point2d((double)(bounds.Width / 2), (double)(bounds.Height / 2 - this._dateSlideRadius + 20)), true, 10);
       e.Display.Draw2dText("Time", this._timeArcColor, new Point2d((double)(bounds.Width / 2), (double)(bounds.Height / 2 - this._timeSlideRadious - 20)), true, 10);
     }
-
     public void SunlightSettings(RhinoDoc doc, double latitude, double longitude) {
       this._rhinoDoc = doc;
       Calendar calendar = (Calendar)new GregorianCalendar();
@@ -84,7 +81,6 @@ namespace RhinoVR {
       for (int index = 0; index < 12; ++index)
         this._daysInEachMonth[index] = index != 0 ? this._daysInEachMonth[index - 1] + calendar.GetDaysInMonth(this._year, index + 1) : calendar.GetDaysInMonth(this._year, index + 1);
     }
-
     public void SunSetToNow(ref double dateParam, ref double timeParam) {
       if (dateParam != -1.0 || timeParam != -1.0)
         return;
@@ -95,7 +91,6 @@ namespace RhinoVR {
       this._datetime = new DateTime(this._year, this._month, this._day, this._hour, this._minute, 0);
       this._rhinoDoc.Lights.Sun.SetPosition(this._datetime, this._latitude, this._longitude);
     }
-
     public void SunColor(double altitude) {
       int red;
       int green1;
@@ -121,15 +116,12 @@ namespace RhinoVR {
       this._dateArcColor = Color.FromArgb(0, maxValue, green2, blue2);
       this._timeArcColor = Color.FromArgb(0, red, green1, blue1);
     }
-
     public void SunLightOn() {
       this._rhinoDoc.Lights.Sun.Enabled = (true);
     }
-
     public void SunLightOff() {
       this._rhinoDoc.Lights.Sun.Enabled = (false);
     }
-
     public void SunPosition(double dateParam, double timeParam) {
       this._dateParam = dateParam;
       this._timeParam = timeParam;

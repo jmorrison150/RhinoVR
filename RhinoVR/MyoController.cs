@@ -31,7 +31,6 @@ namespace RhinoVR {
 
     [DllImport("user32.dll")]
     public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
-
     public void StartMyo() {
       this._myoChannel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create(), MyoErrorHandlerDriver.Create(MyoErrorHandlerBridge.Create())));
       this._myoHub = Hub.Create((IChannelListener)this._myoChannel);
@@ -39,13 +38,11 @@ namespace RhinoVR {
       this._myoHub.MyoDisconnected += new EventHandler<MyoEventArgs>(this._myoHub_MyoDisconnected);
       this._myoChannel.StartListening();
     }
-
     public void StopMyo() {
       this._myoChannel.StopListening();
       this._myoHub.Dispose();
       this._myoChannel.Dispose();
     }
-
     private void _myoHub_MyoConnected(object sender, MyoEventArgs e) {
       RhinoApp.WriteLine("Myo has Connected!");
       e.Myo.Vibrate(VibrationType.Medium);
@@ -55,7 +52,6 @@ namespace RhinoVR {
       e.Myo.OrientationDataAcquired += new EventHandler<OrientationDataEventArgs>(this.Myo_OrientationDataAcquired);
       e.Myo.GyroscopeDataAcquired += new EventHandler<GyroscopeDataEventArgs>(this.Myo_GyroscopeDataAcquired);
     }
-
     private void _myoHub_MyoDisconnected(object sender, MyoEventArgs e) {
       RhinoApp.WriteLine("Myo has Disconnected!");
       e.Myo.Locked -= new EventHandler<MyoEventArgs>(this.Myo_Locked);
@@ -64,13 +60,11 @@ namespace RhinoVR {
       e.Myo.OrientationDataAcquired -= new EventHandler<OrientationDataEventArgs>(this.Myo_OrientationDataAcquired);
       e.Myo.GyroscopeDataAcquired -= new EventHandler<GyroscopeDataEventArgs>(this.Myo_GyroscopeDataAcquired);
     }
-
     private void Myo_Locked(object sender, MyoEventArgs e) {
       e.Myo.Vibrate(VibrationType.Short);
       Cursor.Clip = Screen.PrimaryScreen.Bounds;
       MyoController._myoUnlocked = false;
     }
-
     private void Myo_Unlocked(object sender, MyoEventArgs e) {
       e.Myo.Unlock(UnlockType.Hold);
       e.Myo.Vibrate(VibrationType.Short);
@@ -81,18 +75,15 @@ namespace RhinoVR {
         MyoController._myoUnlocked = false;
       }
     }
-
     private void Myo_OrientationDataAcquired(object sender, OrientationDataEventArgs e) {
       this._mouse.onOrientation(e.Orientation);
     }
-
     private void Myo_GyroscopeDataAcquired(object sender, GyroscopeDataEventArgs e) {
       this._mouse.onGyroscope(e.Gyroscope);
       if (!e.Myo.IsUnlocked)
         return;
       MyoController.mouse_event(1, (int)this._mouse.dx, (int)this._mouse.dy, 0, 0);
     }
-
     private void Myo_PoseChanged(object sender, PoseEventArgs e) {
       RhinoApp.WriteLine("Pose Changed: {0}", (object)e.Pose.ToString());
       if (e.Pose == Pose.DoubleTap)

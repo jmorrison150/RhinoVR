@@ -16,29 +16,14 @@ namespace RhinoVR {
     private bool _miniCursorOn;
     private bool _mirrorCursorOn;
 
-    public int MirrorClosed {
-      get {
-        return this._mirrorClosed;
-      }
-      set {
-        this._mirrorClosed = value;
-      }
-    }
+    public int MirrorClosed {      get {        return this._mirrorClosed;      }
+      set {        this._mirrorClosed = value;      }    }
 
-    public static System.Drawing.Point CursorInLeftViewport {
-      get {
-        return RiftViewportConduit._cursorInLeftViewport;
-      }
-    }
+    public static System.Drawing.Point CursorInLeftViewport {      get {        return RiftViewportConduit._cursorInLeftViewport;      }    }
 
-    public static System.Drawing.Point CursorInRightViewport {
-      get {
-        return RiftViewportConduit._cursorInRightViewport;
-      }
-    }
+    public static System.Drawing.Point CursorInRightViewport {      get {        return RiftViewportConduit._cursorInRightViewport;      }    }
 
-    public RiftViewportConduit() {
-    }
+    public RiftViewportConduit() {    }
 
     protected virtual void CalculateBoundingBox(CalculateBoundingBoxEventArgs e) {
       OculusTracking.StartTracking(RhinoDocument.ActiveDoc);

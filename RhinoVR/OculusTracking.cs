@@ -47,7 +47,6 @@ namespace RhinoVR {
       transform.M33 = (1.0);
       return transform;
     }
-
     public static bool CreatOculusHmd() {
       OculusTracking._oculus = (Wrap)null;
       OculusTracking._hmd = (Hmd)null;
@@ -79,7 +78,6 @@ namespace RhinoVR {
       OculusTracking._oculus = (Wrap)null;
       return false;
     }
-
     public static void SetupTracking() {
       OculusTracking._hmd.SetEnabledCaps(OVR.HmdCaps.ovrHmdCap_Writable_Mask);
       OculusTracking._hmd.ConfigureTracking(OVR.TrackingCaps.ovrTrackingCap_Orientation | OVR.TrackingCaps.ovrTrackingCap_MagYawCorrection | OVR.TrackingCaps.ovrTrackingCap_Position, OVR.TrackingCaps.None);
@@ -116,7 +114,6 @@ namespace RhinoVR {
       OculusTracking._fovL = numArray1;
       OculusTracking._fovR = numArray2;
     }
-
     public static void StartTracking(RhinoDoc rhinoDocument) {
       OVR.TrackingState trackingState = OculusTracking._hmd.GetTrackingState(0.0);
       Transform rollPitchYaw = OculusTracking.Matrix(new Quaternion((double)trackingState.HeadPose.ThePose.Orientation.W, (double)trackingState.HeadPose.ThePose.Orientation.X, (double)trackingState.HeadPose.ThePose.Orientation.Y, (double)trackingState.HeadPose.ThePose.Orientation.Z));
@@ -137,7 +134,6 @@ namespace RhinoVR {
         OculusTracking._camUp[index] = vector3d2;
       }
     }
-
     public static void StopTracking() {
       if (OculusTracking._hmd != null)
         OculusTracking._hmd.Dispose();
@@ -145,14 +141,10 @@ namespace RhinoVR {
         return;
       OculusTracking._oculus.Dispose();
     }
-
     public struct EyeViewport {
       public OVR.EyeRenderDesc RenderDescription { get; set; }
-
       public OVR.FovPort FieldOFView { get; set; }
-
       public OVR.Sizei ViewportSize { get; set; }
-
       public OVR.Vector3f HmdToEyeViewOffset { get; set; }
     }
   }

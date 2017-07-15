@@ -32,7 +32,6 @@ namespace RhinoVR {
         this._acceleration.setInput(value);
       }
     }
-
     public float sensitivity {
       get {
         return this._sensitivity.input;
@@ -41,19 +40,16 @@ namespace RhinoVR {
         this._sensitivity.setInput(value);
       }
     }
-
     public float dx {
       get {
         return this._dx;
       }
     }
-
     public float dy {
       get {
         return this._dy;
       }
     }
-
     public MouseMover() {
       this._dx = 0.0f;
       this._dy = 0.0f;
@@ -63,16 +59,13 @@ namespace RhinoVR {
       this._acceleration = new LinearParameter(1.348136f, 1.68517f, 0.005f);
       this._sensitivity = new LinearParameter(0.7f, 0.4f, 0.01f);
     }
-
     private float getGain(float deviceSpeed, float sensitivity, float acceleration) {
       float num = (float)((double)sensitivity * 2.96705985069275 + 0.174532920122147);
       return (float)(58.2808074951172 + 8688.875 / (1.0 + System.Math.Exp(-(double)acceleration * ((double)deviceSpeed - (double)num)))) * 0.83f;
     }
-
     private float deg2rad(float deg) {
       return (float)((double)deg * 3.14159274101257 / 180.0);
     }
-
     private void updateMouseDeltas(float dx, float dy) {
       float num = 0.01666667f;
       float gain = this.getGain((float)System.Math.Sqrt((double)dx * (double)dx + (double)dy * (double)dy), this._sensitivity.output(), this._acceleration.output());
@@ -91,11 +84,9 @@ namespace RhinoVR {
       this._dy += (float)System.Math.Truncate((double)this._dyFractional);
       this._dyFractional = utils.extractFractional(this._dyFractional);
     }
-
     public void onOrientation(QuaternionF quat) {
       this._quat = quat;
     }
-
     public void onGyroscope(Vector3F gyro) {
       Vector3d vector3d1 = new Vector3d(deg2rad(gyro.X), deg2rad(gyro.Y), deg2rad(gyro.Z));
       Quaternion quaternion1 = new Quaternion(_quat.W, _quat.X, _quat.Y, _quat.Z);
