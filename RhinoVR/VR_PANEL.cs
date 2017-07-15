@@ -13,7 +13,7 @@ namespace RhinoVR {
 
     private static double _eyeHeight = 1.6;
     private readonly RiftViewportConduit _riftViewportConduit = new RiftViewportConduit();
-    private MyoController _myoController = new MyoController();
+    //private MyoController _myoController = new MyoController();
     private bool _displayModeChanged = true;
     private int _indexOfDisplayMode = -1;
     private bool _run;
@@ -80,7 +80,7 @@ namespace RhinoVR {
       VR_PANEL._displayModes = DisplayModeDescription.GetDisplayModes();
       foreach (DisplayModeDescription displayMode in VR_PANEL._displayModes)
         this.DISPLAY_MODE.Items.Add((object)displayMode.EnglishName);
-      this.CB_XBOX.Checked = UserInput.XBoxIsConnected();
+
       VR_PANEL._latitude = double.Parse(this.LATITUDE.Text);
       VR_PANEL._longitude = double.Parse(this.LONGITUDE.Text);
       VoiceController.InitVoiceController();
@@ -177,13 +177,6 @@ namespace RhinoVR {
         return;
       Viewports.CloseMirrorViewport();
     }
-    private void CB_MYO_CheckedChanged(object sender, EventArgs e) {
-      if (this.CB_MYO.Checked)
-        this._myoController.StartMyo();
-      if (this.CB_MYO.Checked)
-        return;
-      this._myoController.StopMyo();
-    }
     private void CB_VOICE_CheckedChanged(object sender, EventArgs e) {
       if (this.CB_VOICE.Checked)
         VoiceController.InitVoiceController();
@@ -230,10 +223,7 @@ namespace RhinoVR {
       this.LB_CAM_FOV = new System.Windows.Forms.Label();
       this.GROP_VR_OPTN = new System.Windows.Forms.GroupBox();
       this.TB_VR_OPTN = new System.Windows.Forms.TableLayoutPanel();
-      this.LB_LONGITUDE = new System.Windows.Forms.Label();
       this.LB_USER_OPTN = new System.Windows.Forms.Label();
-      this.LB_VOICE = new System.Windows.Forms.Label();
-      this.CB_VOICE = new System.Windows.Forms.CheckBox();
       this.EYE_HEIGHT = new System.Windows.Forms.TextBox();
       this.LB_INPT_OPTN = new System.Windows.Forms.Label();
       this.CB_MIRROR = new System.Windows.Forms.CheckBox();
@@ -246,9 +236,12 @@ namespace RhinoVR {
       this.START_POSITION = new System.Windows.Forms.Button();
       this.LB_START_POSITION = new System.Windows.Forms.Label();
       this.LB_DSPL_OPTN = new System.Windows.Forms.Label();
+      this.LB_VOICE = new System.Windows.Forms.Label();
+      this.CB_VOICE = new System.Windows.Forms.CheckBox();
       this.LB_GEO_LOCATION = new System.Windows.Forms.Label();
       this.LB_LATITUDE = new System.Windows.Forms.Label();
       this.LATITUDE = new System.Windows.Forms.TextBox();
+      this.LB_LONGITUDE = new System.Windows.Forms.Label();
       this.LONGITUDE = new System.Windows.Forms.TextBox();
       this.LB_LING_DOT_WORLD = new System.Windows.Forms.LinkLabel();
       this.label1 = new System.Windows.Forms.Label();
@@ -657,21 +650,6 @@ namespace RhinoVR {
       this.TB_VR_OPTN.Size = new System.Drawing.Size(184, 310);
       this.TB_VR_OPTN.TabIndex = 32;
       // 
-      // LB_LONGITUDE
-      // 
-      this.LB_LONGITUDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.LB_LONGITUDE.AutoSize = true;
-      this.LB_LONGITUDE.Font = new System.Drawing.Font("Arial", 8.5F);
-      this.LB_LONGITUDE.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.LB_LONGITUDE.Location = new System.Drawing.Point(4, 282);
-      this.LB_LONGITUDE.Name = "LB_LONGITUDE";
-      this.LB_LONGITUDE.Size = new System.Drawing.Size(84, 27);
-      this.LB_LONGITUDE.TabIndex = 38;
-      this.LB_LONGITUDE.Text = "Longitude";
-      this.LB_LONGITUDE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
       // LB_USER_OPTN
       // 
       this.LB_USER_OPTN.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -688,43 +666,13 @@ namespace RhinoVR {
       this.LB_USER_OPTN.Text = "User Option";
       this.LB_USER_OPTN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
-      // LB_VOICE
-      // 
-      this.LB_VOICE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.LB_VOICE.AutoSize = true;
-      this.LB_VOICE.Font = new System.Drawing.Font("Arial", 8.5F);
-      this.LB_VOICE.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.LB_VOICE.Location = new System.Drawing.Point(4, 209);
-      this.LB_VOICE.Name = "LB_VOICE";
-      this.LB_VOICE.Size = new System.Drawing.Size(84, 25);
-      this.LB_VOICE.TabIndex = 25;
-      this.LB_VOICE.Text = "Voice";
-      this.LB_VOICE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // CB_VOICE
-      // 
-      this.CB_VOICE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.CB_VOICE.AutoSize = true;
-      this.CB_VOICE.Checked = true;
-      this.CB_VOICE.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.CB_VOICE.Location = new System.Drawing.Point(95, 212);
-      this.CB_VOICE.Name = "CB_VOICE";
-      this.CB_VOICE.Size = new System.Drawing.Size(85, 19);
-      this.CB_VOICE.TabIndex = 28;
-      this.CB_VOICE.UseVisualStyleBackColor = true;
-      this.CB_VOICE.CheckedChanged += new System.EventHandler(this.CB_VOICE_CheckedChanged);
-      // 
       // EYE_HEIGHT
       // 
       this.EYE_HEIGHT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.EYE_HEIGHT.BackColor = System.Drawing.SystemColors.Window;
       this.EYE_HEIGHT.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.EYE_HEIGHT.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.EYE_HEIGHT.Location = new System.Drawing.Point(93, 83);
+      this.EYE_HEIGHT.Location = new System.Drawing.Point(93, 84);
       this.EYE_HEIGHT.Margin = new System.Windows.Forms.Padding(1);
       this.EYE_HEIGHT.MinimumSize = new System.Drawing.Size(0, 17);
       this.EYE_HEIGHT.Name = "EYE_HEIGHT";
@@ -898,6 +846,36 @@ namespace RhinoVR {
       this.LB_DSPL_OPTN.Text = "Display Option";
       this.LB_DSPL_OPTN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
+      // LB_VOICE
+      // 
+      this.LB_VOICE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.LB_VOICE.AutoSize = true;
+      this.LB_VOICE.Font = new System.Drawing.Font("Arial", 8.5F);
+      this.LB_VOICE.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.LB_VOICE.Location = new System.Drawing.Point(4, 209);
+      this.LB_VOICE.Name = "LB_VOICE";
+      this.LB_VOICE.Size = new System.Drawing.Size(84, 25);
+      this.LB_VOICE.TabIndex = 25;
+      this.LB_VOICE.Text = "Voice";
+      this.LB_VOICE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // CB_VOICE
+      // 
+      this.CB_VOICE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.CB_VOICE.AutoSize = true;
+      this.CB_VOICE.Checked = true;
+      this.CB_VOICE.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.CB_VOICE.Location = new System.Drawing.Point(95, 212);
+      this.CB_VOICE.Name = "CB_VOICE";
+      this.CB_VOICE.Size = new System.Drawing.Size(85, 19);
+      this.CB_VOICE.TabIndex = 28;
+      this.CB_VOICE.UseVisualStyleBackColor = true;
+      this.CB_VOICE.CheckedChanged += new System.EventHandler(this.CB_VOICE_CheckedChanged);
+      // 
       // LB_GEO_LOCATION
       // 
       this.LB_GEO_LOCATION.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -935,7 +913,7 @@ namespace RhinoVR {
       this.LATITUDE.BackColor = System.Drawing.SystemColors.Window;
       this.LATITUDE.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.LATITUDE.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.LATITUDE.Location = new System.Drawing.Point(93, 262);
+      this.LATITUDE.Location = new System.Drawing.Point(93, 264);
       this.LATITUDE.Margin = new System.Windows.Forms.Padding(1);
       this.LATITUDE.MinimumSize = new System.Drawing.Size(0, 17);
       this.LATITUDE.Name = "LATITUDE";
@@ -944,13 +922,28 @@ namespace RhinoVR {
       this.LATITUDE.Text = "28.546474";
       this.LATITUDE.TextChanged += new System.EventHandler(this.LATITUDE_TextChanged);
       // 
+      // LB_LONGITUDE
+      // 
+      this.LB_LONGITUDE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.LB_LONGITUDE.AutoSize = true;
+      this.LB_LONGITUDE.Font = new System.Drawing.Font("Arial", 8.5F);
+      this.LB_LONGITUDE.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.LB_LONGITUDE.Location = new System.Drawing.Point(4, 282);
+      this.LB_LONGITUDE.Name = "LB_LONGITUDE";
+      this.LB_LONGITUDE.Size = new System.Drawing.Size(84, 27);
+      this.LB_LONGITUDE.TabIndex = 38;
+      this.LB_LONGITUDE.Text = "Longitude";
+      this.LB_LONGITUDE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
       // LONGITUDE
       // 
       this.LONGITUDE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
       this.LONGITUDE.BackColor = System.Drawing.SystemColors.Window;
       this.LONGITUDE.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.LONGITUDE.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.LONGITUDE.Location = new System.Drawing.Point(93, 287);
+      this.LONGITUDE.Location = new System.Drawing.Point(93, 288);
       this.LONGITUDE.Margin = new System.Windows.Forms.Padding(1);
       this.LONGITUDE.MinimumSize = new System.Drawing.Size(0, 17);
       this.LONGITUDE.Name = "LONGITUDE";
