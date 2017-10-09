@@ -114,6 +114,11 @@ namespace RhinoVR {
         this.START_VR.Text = "Running...";
         this.START_VR.ForeColor = Color.Red;
         this._run = true;
+
+
+                //todo add htc vive
+
+
         if (!OculusTracking.CreatOculusHmd())
           return;
         OculusTracking.SetupTracking();
